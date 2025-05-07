@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - ShopEase</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .profile-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .profile-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .purchase-card {
+            transition: transform 0.2s;
+        }
+        .purchase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .purchase-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .purchase-total {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #198754;
+        }
+        .item-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-shop me-2"></i>ShopEase
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="bi bi-house-door me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products.html"><i class="bi bi-grid me-1"></i>Products</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="/cart.html" class="btn btn-outline-light me-2">
+                        <i class="bi bi-cart3"></i> Cart
+                        <span class="badge bg-danger" id="cartCount">0</span>
+                    </a>
+                    <div id="authButtons">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <div class="profile-container">
+            <div class="profile-header">
+                <h1><i class="bi bi-person-circle me-2"></i>My Profile</h1>
+            </div>
+            
+            <div class="row">
+                <!-- Profile Information -->
+                <div class="col-md-4 mb-4">
+                    <div class="profile-section">
+                        <h3><i class="bi bi-person me-2"></i>Profile Information</h3>
+                        <div class="mt-4" id="profileInfo">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Purchase History -->
+                <div class="col-md-8">
+                    <div class="profile-section">
+                        <h3><i class="bi bi-clock-history me-2"></i>Purchase History</h3>
+                        <div class="mt-4" id="purchaseHistory">
+                            <div class="text-center py-5">
+                                <i class="bi bi-bag-x display-1 text-muted"></i>
+                                <p class="mt-3">No purchase history yet</p>
+                                <a href="/" class="btn btn-primary mt-3">Start Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light mt-5 py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-shop me-2"></i>ShopEase</h5>
+                    <p class="mb-0">Your one-stop shop for all your needs</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">&copy; 2024 ShopEase. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/cart.js"></script>
+    <script>
+        // Display profile information
+        async function displayProfile() {
+            try {
+                const token = localStorage.getItem('token');
+                console.log('Token:', token); // Debug log
+
+                if (!token) {
+                    console.log('No token found, redirecting to login');
+                    window.location.href = '/login.html';
+                    return;
+                }
+
+                const response = await fetch('/api/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                console.log('Response status:', response.status); // Debug log
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        console.log('Unauthorized, redirecting to login');
+                        window.location.href = '/login.html';
+                        return;
+                    }
+                    const errorData = await response.json();
+                    console.error('Error response:', errorData); // Debug log
+                    throw new Error(errorData.error || 'Failed to fetch profile data');
+                }
+
+                const data = await response.json();
+                console.log('Profile data:', data); // Debug log
+                const user = data.user;
+
+                // Display profile information
+                const profileInfo = document.getElementById('profileInfo');
+                profileInfo.innerHTML = `
+                    <div class="mb-3">
+                        <p><strong>Name:</strong> ${user.name}</p>
+                        <p><strong>Email:</strong> ${user.email}</p>
+                        <p><strong>Member Since:</strong> ${new Date(user.created_at).toLocaleDateString()}</p>
+                        <p><strong>Total Orders:</strong> ${user.purchases ? user.purchases.length : 0}</p>
+                    </div>
+                `;
+                
+                // Display purchase history
+                const purchaseHistory = document.getElementById('purchaseHistory');
+                if (!user.purchases || user.purchases.length === 0) {
+                    purchaseHistory.innerHTML = `
+                        <div class="text-center py-5">
+                            <i class="bi bi-bag-x display-1 text-muted"></i>
+                            <p class="mt-3">No purchase history yet</p>
+                            <a href="/" class="btn btn-primary mt-3">Start Shopping</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                purchaseHistory.innerHTML = user.purchases.map(purchase => `
+                    <div class="card purchase-card mb-4">
+                        <div class="card-header bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="purchase-date">
+                                    <i class="bi bi-calendar3"></i>
+                                    ${new Date(purchase.date).toLocaleDateString('en-US', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit'
+                                    })}
+                                </span>
+                                <span class="text-muted">Order #${purchase.id}</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="item-list mb-3">
+                                ${purchase.items.map(item => `
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div>
+                                            <span class="fw-bold">${item.quantity}x</span>
+                                            <span>${item.name}</span>
+                                        </div>
+                                        <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                                <span class="fw-bold">Total</span>
+                                <span class="purchase-total">$${purchase.total.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('profileInfo').innerHTML = `
+                    <div class="alert alert-danger">
+                        Failed to load profile information. Please try again later.
+                        <br>
+                        <small>Error: ${error.message}</small>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            displayProfile();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html> 

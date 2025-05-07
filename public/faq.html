@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - shopEase</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">shopEase</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/faq.html">FAQ</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="/cart.html" class="btn btn-outline-light me-2">
+                        Cart <span class="badge bg-danger" id="cartCount">0</span>
+                    </a>
+                    <div id="authButtons">
+                        <a href="/login.html" class="btn btn-outline-light me-2">Login</a>
+                        <a href="/register.html" class="btn btn-primary">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="text-center mb-4">Frequently Asked Questions</h1>
+                        
+                        <div class="accordion" id="faqAccordion">
+                            <!-- Shipping -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#shipping">
+                                        Shipping Information
+                                    </button>
+                                </h2>
+                                <div id="shipping" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <h5>How long does shipping take?</h5>
+                                        <p>Standard shipping typically takes 3-5 business days. Express shipping (1-2 business days) is available for select items.</p>
+                                        
+                                        <h5>Do you ship internationally?</h5>
+                                        <p>Yes, we ship to most countries worldwide. International shipping times vary by location.</p>
+                                        
+                                        <h5>How much does shipping cost?</h5>
+                                        <p>Shipping costs are calculated based on your location and the weight of your order. Free shipping is available for orders over $50.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Returns & Refunds -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#returns">
+                                        Returns & Refunds
+                                    </button>
+                                </h2>
+                                <div id="returns" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <h5>What is your return policy?</h5>
+                                        <p>We accept returns within 30 days of delivery. Items must be unused and in original packaging.</p>
+                                        
+                                        <h5>How do I initiate a return?</h5>
+                                        <p>Contact our customer service team through your account dashboard or email support@shopease.com.</p>
+                                        
+                                        <h5>How long do refunds take?</h5>
+                                        <p>Refunds are processed within 5-7 business days after receiving the returned item.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Payment -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#payment">
+                                        Payment & Security
+                                    </button>
+                                </h2>
+                                <div id="payment" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <h5>What payment methods do you accept?</h5>
+                                        <p>We accept major credit cards, PayPal, and other popular payment methods.</p>
+                                        
+                                        <h5>Is my payment information secure?</h5>
+                                        <p>Yes, we use industry-standard encryption to protect your payment information.</p>
+                                        
+                                        <h5>Do you store my credit card information?</h5>
+                                        <p>No, we do not store your credit card information. All payments are processed securely through our payment partners.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Account -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#account">
+                                        Account & Orders
+                                    </button>
+                                </h2>
+                                <div id="account" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <h5>How do I track my order?</h5>
+                                        <p>You can track your order through your account dashboard or using the tracking number sent to your email.</p>
+                                        
+                                        <h5>Can I change or cancel my order?</h5>
+                                        <p>Orders can be modified or cancelled within 1 hour of placement. Contact customer service for assistance.</p>
+                                        
+                                        <h5>How do I update my account information?</h5>
+                                        <p>You can update your information through your account settings or profile page.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Product -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#product">
+                                        Product Information
+                                    </button>
+                                </h2>
+                                <div id="product" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <h5>Are your products authentic?</h5>
+                                        <p>Yes, all our products are 100% authentic and sourced from authorized manufacturers.</p>
+                                        
+                                        <h5>Do you offer product warranties?</h5>
+                                        <p>Most products come with manufacturer warranties. Warranty information is listed on product pages.</p>
+                                        
+                                        <h5>What if I receive a damaged item?</h5>
+                                        <p>Contact our customer service immediately with photos of the damaged item for assistance.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <h3>Still Have Questions?</h3>
+                            <p>Our customer service team is here to help!</p>
+                            <a href="mailto:support@shopease.com" class="btn btn-primary">Contact Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light mt-5 py-3">
+        <div class="container text-center">
+            <p>&copy; 2024 shopEase. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/cart.js"></script>
+</body>
+</html> 
