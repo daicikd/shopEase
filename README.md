@@ -1,3 +1,4 @@
+ HEAD
 # ShopEase - E-commerce Platform
 
 ShopEase is a modern e-commerce platform built with Node.js, Express, and SQLite. It provides a seamless shopping experience with features like user authentication, product browsing, cart management, and secure payment processing.
@@ -141,3 +142,7 @@ This project is licensed under the CSC 317 Project At SFSU.
 ## Support
 
 For support, email support@shopease.com or create an issue in the repository. 
+
+# shopEase
+This is my CSC 317 Final Project.
+ 7241fbf9902311620eaed461d990dbd2ba746278
