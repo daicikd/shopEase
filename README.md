@@ -3,6 +3,7 @@
 
 ShopEase is a modern e-commerce platform built with Node.js, Express, and SQLite. It provides a seamless shopping experience with features like user authentication, product browsing, cart management, and secure payment processing.
 
+Link to access the website: https://courageous-chip-meerkat.glitch.me/ 
 ---
 
 ## Features
